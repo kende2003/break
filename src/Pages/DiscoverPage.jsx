@@ -11,13 +11,15 @@ const DiscoverPage = ()  => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
-    const handleCreatePost = async (post) => {
+    const handleCreatePost = async (newPost) => {
         setLoading(true)
-        await createPost(post)
-        setPosts((prevPosts) => {
-            const updatedPosts = [...prevPosts, post];
-            return updatedPosts.sort((a, b) => _time(b.created) - _time(a.created));
-        });
+
+        await createPost(newPost)
+        const fetchPosts = async () => {
+            const data = await getAllPost();
+            setPosts(data);
+          };
+          fetchPosts()
         setLoading(false)
         navigate("/discover")
     }

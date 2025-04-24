@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthProvider";
+import { getAllPost } from "../../client/posts.js";
 import "./PostList.css";
 
 const PostList = ( { onSubmit, posts } ) => {
@@ -66,7 +67,9 @@ const PostList = ( { onSubmit, posts } ) => {
     
         if (post && post.trim() !== "") {
             onSubmit({ post });
+
             setPost("");
+
         }
     
         closeModal();
@@ -161,7 +164,7 @@ const PostList = ( { onSubmit, posts } ) => {
         {user && 
         <div className="posts-div">
         {posts.map((post) => (<div key={post.id} className="container create-div-post">{post.post}</div>))
-
+            
         }
 
         </div>
