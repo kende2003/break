@@ -1,7 +1,7 @@
 @use 'sass:color';
 @import "bourbon"; 
 
-.error-box {
+.error-box-sign-in {
   position: absolute;
   top: 54vh;
   left: 47%;
@@ -15,7 +15,7 @@
 }
 .error-box-sign-up {
 
-  top: 54vh;
+  top: 58vh;
   left: 47%;
   color: red;
   font-family: Arial, Helvetica, sans-serif;

@@ -16,7 +16,7 @@ const DiscoverPage = ()  => {
         await createPost(post)
         setPosts((prevPosts) => {
             const updatedPosts = [...prevPosts, post];
-            return updatedPosts.toSorted((a, b) => _time(b.created) - _time(a.created));
+            return updatedPosts.sort((a, b) => _time(b.created) - _time(a.created));
         });
         setLoading(false)
         navigate("/discover")

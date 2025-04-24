@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./AuthForm.scss"
 
-const AuthForm = ({ onSubmit, onGoogleAuth, isSignIn, disabled=false }) => {
+const AuthForm = ({ onSubmit, onGoogleAuth, isSignIn, disabled=false, error}) => {
     const [password, setPassword] = useState("")
     const [confirm, setConfirm] = useState("")
     const [email, setEmail] = useState("")
-    const [error, setError] = useState("")
     const navigate = useNavigate();
 
     const changeHandler = (setter) => (e) => {  
@@ -59,13 +58,13 @@ const AuthForm = ({ onSubmit, onGoogleAuth, isSignIn, disabled=false }) => {
 
             <input value={email} onChange={changeHandler(setEmail)} required type="text" name="email" id="email" placeholder="Email"/>
             <input htmlFor="password" value={password} onChange={changeHandler(setPassword)} required type="password" name="password" id="password" placeholder="Password" />
-            {error && isSignIn && <div className="error-box">{error}</div>}
+            {error && isSignIn && <div className="error-box-sig-in">{error}</div>}
         {!isSignIn && (
             <input value={confirm} onChange={changeHandler(setConfirm)} required name="confirm-password" id="confirm-password" type="password" placeholder="Confirm password" />
             
         )
        }
-        {error &&  <div className="error-box-sign-up" >{error}</div>}
+        {error && !isSignIn && <div className="error-box-sig-up">{error}</div>}
         <button disabled={disabled} type="submit">{isSignIn ? "Login" : "Sign up"}</button>
         <span>
         <button onClick={onGoogleAuth} type="button" className="login-with-google-btn"></button>

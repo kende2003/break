@@ -1,11 +1,10 @@
-
 import AuthForm from "../Components/AuthForm/AuthForm";
 import { useAuth } from "../Context/AuthProvider";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "../Components/AuthForm/AuthForm.scss"
 const Login = () =>  {
-    const { signInWithGoogle, sigInWithCreds, error, reset} = useAuth()
+    const { signInWithGoogle, signInWithCreds, error, reset} = useAuth()
     const [errorMessage, setErrorMessage] = useState()
     const [isError, setIsError] = useState(false)
     const navigate = useNavigate()
@@ -16,7 +15,7 @@ const Login = () =>  {
 
     const handleSubmit = async ({ email, password}) => {
   
-        sigInWithCreds(email, password)
+        signInWithCreds(email, password)
 
     }
     useEffect(() => {
@@ -28,10 +27,8 @@ const Login = () =>  {
         }, 2000)
     },[error])
     return(
-        <>
-   
-            <AuthForm isSignIn disabled={isError} onSubmit={handleSubmit}  onGoogleAuth={signInWithGoogle}/>
-            {error ? <div className="error-box">{errorMessage}</div> : null}
+        <>  
+            <AuthForm isSignIn disabled={isError} onSubmit={handleSubmit}  onGoogleAuth={signInWithGoogle} error={errorMessage}/>
         </>
     )
 }

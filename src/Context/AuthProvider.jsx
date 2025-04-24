@@ -11,7 +11,7 @@ function AuthProvider({ children }) {
     const [user, loading] = useIdToken(auth)
     const [error, setError] = useState(null)
 
-    const sigInWithCreds = useCallback((email, password) =>  {
+    const signInWithCreds = useCallback((email, password) =>  {
         setError(null)
         return signInWithEmailAndPassword(auth, email, password).catch((err) => {
             if(err.code === AuthErrorCodes.INVALID_PASSWORD) {
@@ -67,7 +67,7 @@ function AuthProvider({ children }) {
             error,
             user,
             signOut,
-            sigInWithCreds,
+            signInWithCreds,
             signUpWithCreds,
             signInWithGoogle,
             reset,
