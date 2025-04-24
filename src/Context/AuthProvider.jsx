@@ -27,14 +27,21 @@ function AuthProvider({ children }) {
 
     const signUpWithCreds = useCallback((email, password) => {
         setError(null)
-
         return createUserWithEmailAndPassword(auth, email, password).catch(
             (err) => {
+
                 if (err.code === AuthErrorCodes.EMAIL_EXISTS) {
                     setError("Email already exists")
                 } else if (err.code === AuthErrorCodes.INVALID_PASSWORD) {
                     setError("Invalid password")
-                } else  {
+                    
+                } else if (err.code === AuthErrorCodes.INVALID_EMAIL) {
+                    setError("Invalid email")
+                } 
+                else if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
+                    setError("Password should be at least 6 characters")
+                }
+                else  {
                     setError("Authentication error")
                 }
             }

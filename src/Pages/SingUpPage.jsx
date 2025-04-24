@@ -6,14 +6,17 @@ import AuthForm from "../Components/AuthForm";
 const SignUpPage = () => {
     const { signUpWithCreds, signInWithGoogle, error, reset } = useAuth()
     const [errorMessage, setErrorMessage] = useState()
+    const [isError, setIsError] = useState(false)
     useEffect(() =>{
         reset()
     }, [reset])
     useEffect(() => {
         setErrorMessage(error)
+        setIsError(true)
         setTimeout(() => {
             setErrorMessage("")
-        }, 2000)
+            setIsError(false)
+        }, 3000)
     },[error])
     const handleSubmit = async ({email, password}) =>  {
 
@@ -23,7 +26,7 @@ const SignUpPage = () => {
     return (
 
         <>
-            <AuthForm isSignIn={false} onSubmit={handleSubmit} onGoogleAuth={signInWithGoogle} error={errorMessage}/>
+            <AuthForm isSignIn={false} onSubmit={handleSubmit} onGoogleAuth={signInWithGoogle} error={errorMessage} disabled={isError}/>
         </>
     )
 }

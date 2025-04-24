@@ -24,7 +24,7 @@ const Login = () =>  {
         setTimeout(() => {
             setErrorMessage("")
             setIsError(false)
-        }, 2000)
+        }, 3000)
     },[error])
     return(
         <>  

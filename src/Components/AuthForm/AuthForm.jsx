@@ -6,6 +6,7 @@ import "./AuthForm.scss"
 const AuthForm = ({ onSubmit, onGoogleAuth, isSignIn, disabled=false, error}) => {
     const [password, setPassword] = useState("")
     const [confirm, setConfirm] = useState("")
+    const [errorMessage, setError] = useState("")
     const [email, setEmail] = useState("")
     const navigate = useNavigate();
 
@@ -19,10 +20,10 @@ const AuthForm = ({ onSubmit, onGoogleAuth, isSignIn, disabled=false, error}) =>
             setError("Passwords does not match!");
             setTimeout(() => {
                 setError("")
-            }, 2000)
+            }, 3000)
             return;
         }
-  
+        
         onSubmit({
             email,
             password
@@ -60,8 +61,10 @@ const AuthForm = ({ onSubmit, onGoogleAuth, isSignIn, disabled=false, error}) =>
             <input htmlFor="password" value={password} onChange={changeHandler(setPassword)} required type="password" name="password" id="password" placeholder="Password" />
             {error && isSignIn && <div className="error-box-sig-in">{error}</div>}
         {!isSignIn && (
+            <>
             <input value={confirm} onChange={changeHandler(setConfirm)} required name="confirm-password" id="confirm-password" type="password" placeholder="Confirm password" />
-            
+            {errorMessage && <div className="error-box-sig-up">{errorMessage}</div>} 
+            </>
         )
        }
         {error && !isSignIn && <div className="error-box-sig-up">{error}</div>}
