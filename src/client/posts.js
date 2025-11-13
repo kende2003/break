@@ -2,6 +2,8 @@ import auth from "../firebase/auth";
 
 const BASE_URL = `${import.meta.env.VITE_FB_DATABASE_URL}/posts`
 
+console.log("Base URL:", BASE_URL);
+
 const getToken = () => auth?.currentUser?.accessToken ?? ""
 
 const getUrlForList = () => `${BASE_URL}/list.json?auth=${getToken()}`
